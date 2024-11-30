@@ -1,2 +1,3 @@
-# Texty
-Don't mind the README
+## Texty
+
+An App Inventor 2 extension created using Rush.
