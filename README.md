@@ -1,6 +1,6 @@
 ## Texty
 
-Introducing Texty <a href="https://raw.githubusercontent.com/bextdev/Texty/refs/heads/main/assets/texty-photoaidcom-cropped.png">
+Introducing Texty <img src="https://raw.githubusercontent.com/bextdev/Texty/refs/heads/main/assets/texty-photoaidcom-cropped.png">
 
 More information & Download link:
 
