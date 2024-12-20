@@ -7,10 +7,10 @@ description: Extension component for Texty. Created using Rush.
 
 version:
   number: auto
-  name: '1.5'
+  name: '1.6 Blue'
 
 authors:
-  - Bextdev
+  - Bxtdev
 
 build:
   release:
