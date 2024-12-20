@@ -1,15 +1,15 @@
-# Add any ProGuard configurations specific to this
-# extension here.
-
--keep public class ph.bxtdev.Texty.Texty {
+-keep public class ph.bextdev.Texty.Texty {
     public *;
- }
--keeppackagenames gnu.kawa**, gnu.expr**
+}
+-keep class java.lang.invoke.StringConcatFactory { *; }
+-keep class gnu.kawa** { *; }
+-keep class gnu.expr** { *; }
 
--optimizationpasses 4
+-dontwarn java.lang.invoke.StringConcatFactory
+-optimizations aggressive
 -allowaccessmodification
 -mergeinterfacesaggressively
 
--repackageclasses 'ph/bxtdev/Texty/repack'
+-repackageclasses 'ph/bextdev/Texty/repack'
 -flattenpackagehierarchy
 -dontpreverify

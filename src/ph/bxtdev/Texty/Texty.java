@@ -248,4 +248,52 @@ public class Texty extends AndroidNonvisibleComponent {
             messageHistory.put(lastSentMessage, list);
         }
     }
+
+    @SimpleFunction(description = "Gets a component's name")
+    public void SendComponentName(String componentName) {
+        String name;
+        if (form instanceof ReplForm) {
+            name = lookupComponentInRepl(componentName);
+            SendMessage(name);
+        } else {
+            name = lookupComponentInForm(componentName);
+            SendMessage(name);
+        }
+    }
+
+    private String lookupComponentInRepl(String componentName) {
+        Scheme lang = Scheme.getInstance();
+        try {
+            // Since we're in the REPL, we can cheat and invoke the Scheme interpreter to get the method.
+            Object result = lang.eval("(begin (require <com.google.youngandroid.runtime>)(get-component " +
+                    componentName + "))");
+            if (result instanceof Component) {
+                return ((Component) result).getClass().getSimpleName();
+            } else {
+                Log.e(TAG, "Wanted a Component, but got a " +
+                        (result == null ? "null" : result.getClass().toString()));
+            }
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        return "";
+    }
+
+    private String lookupComponentInForm(String componentName) {
+        try {
+            // Get the field by name
+            Field field = form.getClass().getField(componentName);
+            // Get the field's value, since field itself isn't a Component
+            Object component = field.get(form);
+            if (component instanceof Component) {
+                return component.getClass().getSimpleName();
+            } else {
+                Log.e(TAG, "Wanted a Component, but got a " +
+                        (component == null ? "null" : component.getClass().toString()));
+            }
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            Log.e(TAG, "Error accessing component: " + componentName, e);
+        }
+        return "";
+    }
 }
